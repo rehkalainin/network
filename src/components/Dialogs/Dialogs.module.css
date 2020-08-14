@@ -1,0 +1,16 @@
+
+.dialogsWrapper {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+
+}
+.dialogs {
+    padding: 20px;
+}
+.messages{
+    padding: 20px;
+}
+.messages textarea{
+    margin-top: 10px;
+}
+
