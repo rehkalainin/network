@@ -1,22 +1,25 @@
 import * as serviceWorker from "./serviceWorker"
 import React from 'react';
 import './index.css';
-import state, {addMessage, addPost, subscribe, updateMessage, updateText} from "./redux/state"
+import store from "./redux/store"
 import ReactDOM from "react-dom";
 import App from "./App";
 
 let rerender = (state) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={state} addPost={addPost} updateText={updateText}
-                 updateMessage={updateMessage} addMessage={addMessage}/>
+            <App state={store.getState()}
+                 addPost={store.addPost.bind(store)}
+                 updateText={store.updateText.bind(store)}
+                 updateMessage={store.updateMessage.bind(store)}
+                 addMessage={store.addMessage.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')
     )
 }
-rerender(state)
+rerender(store.getState())
 
-subscribe(rerender)
+store.subscribe(rerender)
 
 
 serviceWorker.unregister()
