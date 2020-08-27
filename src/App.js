@@ -9,7 +9,7 @@ import News from './components/News/News'
 import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
 import DialogsConteiner from './components/Dialogs/DialogsConteiner'
-import UsersConteiner from './components/Users/UsersConteiner'
+import UsersConteiner from './components/Users'
 
 const App = () => {
   return (

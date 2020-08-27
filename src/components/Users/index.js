@@ -7,8 +7,7 @@ import {
   usersUnfollowAC,
 } from '../../redux/usersPageReduser'
 import UserApiConteiner from './UserApiConteiner'
-
-const { connect } = require('react-redux')
+import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
   return {
@@ -42,6 +41,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const UserConteiner = connect(mapStateToProps, mapDispatchToProps)(UserApiConteiner)
-
-export default UserConteiner
+export default connect(mapStateToProps, mapDispatchToProps)(UserApiConteiner)
