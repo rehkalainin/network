@@ -1,26 +1,28 @@
-import * as serviceWorker from "./serviceWorker"
-import React from 'react';
-import './index.css';
-import store from "./redux/store"
-import ReactDOM from "react-dom";
-import App from "./App";
+import * as serviceWorker from './serviceWorker'
+import React from 'react'
+import './index.css'
+import store from './redux/reduxStore'
+import ReactDOM from 'react-dom'
+import App from './App'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 
-let rerender = (state) => {
-    ReactDOM.render(
+let rerender = () => {
+  ReactDOM.render(
+    <BrowserRouter>
+      <Provider store={store}>
         <React.StrictMode>
-            <App state={store.getState()}
-                 addPost={store.addPost.bind(store)}
-                 updateText={store.updateText.bind(store)}
-                 updateMessage={store.updateMessage.bind(store)}
-                 addMessage={store.addMessage.bind(store)}/>
-        </React.StrictMode>,
-        document.getElementById('root')
-    )
+          <App />
+        </React.StrictMode>
+      </Provider>
+    </BrowserRouter>,
+    document.getElementById('root'),
+  )
 }
-rerender(store.getState())
+rerender()
 
-store.subscribe(rerender)
-
+store.subscribe(() => {
+  rerender()
+})
 
 serviceWorker.unregister()
-

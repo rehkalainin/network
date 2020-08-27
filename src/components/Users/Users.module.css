@@ -1,0 +1,66 @@
+.pagination{
+    padding: 10px;
+}
+.pagination_selectedPage{
+    font-weight: bold;
+    color: gold;
+}
+.users{
+    padding: 20px;
+}
+.users_user{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    margin-bottom: 10px;
+
+}
+.users_user_view{
+    display: grid;
+    justify-items: center;
+}
+.users_user_info{
+    border: white solid 1px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+    color: white;
+    padding: 10px;
+
+}
+.users_user_view .userPhoto{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.users_user_view .button{
+
+}
+.users_user_view .button_follow{
+    background: gold;
+}
+.users_user_view .button_unFollow{
+background: silver;
+}
+.users_user_info .name{
+
+
+}
+.users_user_info .status{
+    text-align: justify;
+
+}
+.users_user_info .location{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 5px;
+    text-align: right;
+    padding: 10px;
+
+}
+.users_user_info .location_country{
+}
+.users_user_info .location_city{
+}
+
