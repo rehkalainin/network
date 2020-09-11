@@ -1,0 +1,8 @@
+- [ ] Методы промисов
+- [ ] Css position, request-animation-frame псевдоэлемнты
+- [ ] Css псевдоклассы анимация
+- [ ] thunk
+- [ ] жизненные циклы shouldComponentUpdate, pureComponent
+- [ ] React.memo
+- [ ] Browser API, cache api
+- [ ] Proxy глобальный класс

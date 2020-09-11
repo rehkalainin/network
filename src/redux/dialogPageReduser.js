@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_MESSAGE = 'UPDATE-MESSAGE'
 
 const initialState = {
   dialogs: [
@@ -16,32 +15,21 @@ const initialState = {
     { message: 'Good luck' },
     { message: 'See you soon' },
   ],
-  newMessage: 'Enter text',
 }
 
 const dialogPageReduser = (state = initialState, action) => {
-  const stateCopy = Object.create(state)
-
   switch (action.type) {
     case ADD_MESSAGE:
-      const message = {
-        message: state.newMessage,
+      return {
+        ...state,
+        messages: [...state.messages, { message: action.newMessageBody }],
       }
-      stateCopy.messages.push(message)
-      return stateCopy
-
-    case UPDATE_MESSAGE:
-      stateCopy.newMessage = action.message
-      return stateCopy
 
     default:
       return state
   }
 }
-export const addMessageActionCreator = () => {
-  return { type: ADD_MESSAGE }
-}
-export const updateMessageActionCreator = (text) => {
-  return { type: UPDATE_MESSAGE, message: text }
+export const addMessage = (newMessageBody) => {
+  return { type: ADD_MESSAGE, newMessageBody }
 }
 export default dialogPageReduser

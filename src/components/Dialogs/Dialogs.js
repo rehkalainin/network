@@ -2,6 +2,8 @@ import React from 'react'
 import style from './Dialogs.module.css'
 import Dialog from './Dialog/Dialog'
 import Message from './Message/Message'
+import Redirect from 'react-router-dom/es/Redirect'
+import { AddMessageFormRedux } from './Message/MessageForm'
 
 const Dialogs = (props) => {
   const dialogsComponents = props.dialogs.map((dialog) => (
@@ -10,15 +12,8 @@ const Dialogs = (props) => {
 
   const messagesComponents = props.messages.map((message) => <Message text={message.message} />)
 
-  const messageText = React.createRef()
-
-  const onAddMessage = () => {
-    props.addMessage()
-    props.updateMessage(' ')
-  }
-  const onUpdateMessage = () => {
-    const text = messageText.current.value
-    props.updateMessage(text)
+  const addNewMessage = (values) => {
+    props.addMessage(values.newMessageBody)
   }
 
   return (
@@ -26,12 +21,7 @@ const Dialogs = (props) => {
       <div className={style.dialogs}>{dialogsComponents}</div>
       <div className={style.messages}>
         {messagesComponents}
-        <div>
-          <textarea onChange={onUpdateMessage} ref={messageText} value={props.newMessage} />
-        </div>
-        <div>
-          <button onClick={onAddMessage}>send message</button>
-        </div>
+        <AddMessageFormRedux onSubmit={addNewMessage} />
       </div>
     </div>
   )

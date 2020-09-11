@@ -1,13 +1,21 @@
-import {
-  setCurrentPageAC,
-  setIsLoadingAC,
-  setTotalCountAC,
-  setUsersAC,
-  usersFollowAC,
-  usersUnfollowAC,
-} from '../../redux/usersPageReduser'
 import UserApiConteiner from './UserApiConteiner'
 import { connect } from 'react-redux'
+
+import {
+  follow,
+  followUser,
+  getUsers,
+  getUsersByPage,
+  setCurrentPage,
+  setInProgress,
+  setIsLoading,
+  setTotalCount,
+  setUsers,
+  unFollow,
+  unfollowUser,
+} from '../../redux/usersPageReducer'
+import { withLogin } from '../../hoc/withLogin'
+import { compose } from 'redux'
 
 const mapStateToProps = (state) => {
   return {
@@ -16,29 +24,23 @@ const mapStateToProps = (state) => {
     currentPage: state.userPage.currentPage,
     usersPerPage: state.userPage.usersPerPage,
     isLoading: state.userPage.isLoading,
+    inProgress: state.userPage.inProgress,
+    isLogin: state.auth.isLogin,
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userId) => {
-      dispatch(usersFollowAC(userId))
-    },
-    unFollow: (userId) => {
-      dispatch(usersUnfollowAC(userId))
-    },
-    setUsers: (users) => {
-      dispatch(setUsersAC(users))
-    },
-    setTotalCount: (totalUsers) => {
-      dispatch(setTotalCountAC(totalUsers))
-    },
-    setCurrentPage: (pageNumber) => {
-      dispatch(setCurrentPageAC(pageNumber))
-    },
-    setIsLoading: (isLoading) => {
-      dispatch(setIsLoadingAC(isLoading))
-    },
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserApiConteiner)
+export default compose(
+  connect(mapStateToProps, {
+    follow,
+    unFollow,
+    setUsers,
+    setTotalCount,
+    setIsLoading,
+    setInProgress,
+    setCurrentPage,
+    getUsers,
+    getUsersByPage,
+    unfollowUser,
+    followUser,
+  }),
+  withLogin,
+)(UserApiConteiner)

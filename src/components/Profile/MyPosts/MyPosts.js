@@ -1,31 +1,20 @@
 import React from 'react'
 import style from './MyPosts.module.css'
 import Post from './Post/Post'
+import { PostFormRedux } from './Post/PostForm'
 
 const MyPosts = (props) => {
   const postsComponents = props.posts.map((post) => <Post message={post.message} />)
 
-  let textPost = React.createRef()
-
-  const onAddPost = () => {
-    props.addPost()
-    props.updatePost(' ')
-  }
-  const onUpdatePost = () => {
-    const text = textPost.current.value
-    props.updatePost(text)
+  const addPost = (value) => {
+    props.addPost(value.newPostText)
   }
 
   return (
     <div className={style.posts}>
       <h3>My Posts </h3>
       <div>
-        <div>
-          <textarea onChange={onUpdatePost} ref={textPost} value={props.newPostText} />
-        </div>
-        <div>
-          <button onClick={onAddPost}>Add post</button>
-        </div>
+        <PostFormRedux onSubmit={addPost} />
         {postsComponents}
       </div>
     </div>

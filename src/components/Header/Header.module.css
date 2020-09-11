@@ -1,8 +1,31 @@
 .header {
-    background: aquamarine;
+    background: cadetblue;
     grid-area: h;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    padding: 10px;
+    align-content: center;
 }
 
-.header img {
-    height: 50px;
+
+.header_login {
+    text-align: end;
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+
 }
+
+.header_login a {
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+.header_logo {
+}
+
+.header_logo img {
+    height: 40px;
+}
+

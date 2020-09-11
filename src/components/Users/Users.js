@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './Users.module.css'
 import userPhoto from '../../assets/photos/userPhoto.png'
+import { NavLink } from 'react-router-dom'
 
 const Users = (props) => {
   let pages = []
@@ -8,7 +9,6 @@ const Users = (props) => {
   for (let i = 1; i <= pagesSize; i++) {
     pages.push(i)
   }
-
   return (
     <div>
       <div className={style.pagination}>
@@ -28,16 +28,19 @@ const Users = (props) => {
         {props.users.map((user) => (
           <div className={style.users_user}>
             <div className={style.users_user_view}>
-              <img
-                src={user.photos.small != null ? user.photos.small : userPhoto}
-                className={style.userPhoto}
-              />
+              <NavLink to={'/profile/' + user.id}>
+                <img
+                  src={user.photos.small != null ? user.photos.small : userPhoto}
+                  className={style.userPhoto}
+                />
+              </NavLink>
               <div className={style.button}>
                 {user.followed ? (
                   <button
                     className={style.button_unFollow}
+                    disabled={props.inProgress.some((id) => id === user.id)}
                     onClick={() => {
-                      props.unFollow(user.id)
+                      props.unfollowUser(user.id)
                     }}
                   >
                     unfollow
@@ -45,8 +48,9 @@ const Users = (props) => {
                 ) : (
                   <button
                     className={style.button_follow}
-                    onClick={() => {
-                      props.follow(user.id)
+                    disabled={props.inProgress.some((id) => id === user.id)}
+                    onClick={async () => {
+                      props.followUser(user.id)
                     }}
                   >
                     follow
