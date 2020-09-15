@@ -1,53 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-class ProfileStatus extends React.Component {
-  state = {
-    editMode: false,
-    status: this.props.status,
-  }
-  activeStatus = () => {
-    this.setState({ editMode: true })
-  }
-  diactiveStatus = () => {
-    this.setState({ editMode: false })
-    this.props.updateStatus(this.state.status)
-  }
-  changeStatus = (e) => {
-    this.setState({ status: e.currentTarget.value })
-  }
+const ProfileStatus = (props) => {
+  const [editMode, setEditMode] = useState(false)
+  const [status, setStatus] = useState(props.status)
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.status != this.props.status) {
-      this.setState({
-        status: this.props.status,
-      })
-    }
+  const activateStatus = () => {
+    setEditMode(true)
   }
+  const deactivateStatus = () => {
+    setEditMode(false)
+    props.updateStatus(status)
+  }
+  const changeStatus = (e) => {
+    setStatus(e.currentTarget.value)
+  }
+  useEffect(() => {
+    setStatus(props.status)
+  }, [props.status])
 
-  render() {
-    return (
-      <div>
-        {!this.state.editMode ? (
-          <div>
-            <span onDoubleClick={this.activeStatus}>
-              Status : {this.state.status || 'Absent status'}
-            </span>
-          </div>
-        ) : (
-          <div>
-            <input
-              onChange={(e) => {
-                this.changeStatus(e)
-              }}
-              autoFocus={true}
-              onBlur={this.diactiveStatus}
-              value={this.state.status}
-            />
-          </div>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div>
+      {!editMode ? (
+        <div>
+          <span onDoubleClick={activateStatus}>Status : {status || 'Absent status'}</span>
+        </div>
+      ) : (
+        <div>
+          <input
+            onChange={(e) => {
+              changeStatus(e)
+            }}
+            autoFocus={true}
+            onBlur={deactivateStatus}
+            value={status}
+          />
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default ProfileStatus

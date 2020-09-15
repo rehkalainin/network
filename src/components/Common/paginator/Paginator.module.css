@@ -1,0 +1,12 @@
+.pagination{
+    padding: 10px;
+}
+.pagination span{
+    padding: 2px;
+    margin: 2px;
+
+}
+.pagination_selectedPage{
+    font-weight: bold;
+    color: gold;
+}

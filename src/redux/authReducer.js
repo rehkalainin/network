@@ -1,4 +1,5 @@
 import { authApi } from '../api/Auth'
+import { stopSubmit } from 'redux-form'
 
 const SET_AUTH_USER_DATA = 'SET-AUTH-USER-DATA'
 
@@ -34,6 +35,9 @@ export const login = (email, password, rememberme) => async (dispatch) => {
   const res = await authApi.login(email, password, rememberme)
   if (res.data.resultCode === 0) {
     dispatch(authMe())
+  } else {
+    const message = res.data.messages.length > 0 ? res.data.messages[0] : 'Common login error'
+    dispatch(stopSubmit('login', { _error: message }))
   }
 }
 export const logout = () => async (dispatch) => {

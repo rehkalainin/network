@@ -16,16 +16,25 @@ import {
 } from '../../redux/usersPageReducer'
 import { withLogin } from '../../hoc/withLogin'
 import { compose } from 'redux'
+import {
+  getAllUsers,
+  getCurrentPage,
+  getInProgress,
+  getIsLoading,
+  getIsLogin,
+  getTotalCount,
+  getUsersPerPage,
+} from '../../redux/selectors/usersSelectors'
 
 const mapStateToProps = (state) => {
   return {
-    users: state.userPage.users,
-    totalCount: state.userPage.totalCount,
-    currentPage: state.userPage.currentPage,
-    usersPerPage: state.userPage.usersPerPage,
-    isLoading: state.userPage.isLoading,
-    inProgress: state.userPage.inProgress,
-    isLogin: state.auth.isLogin,
+    users: getAllUsers(state),
+    totalCount: getTotalCount(state),
+    currentPage: getCurrentPage(state),
+    usersPerPage: getUsersPerPage(state),
+    isLoading: getIsLoading(state),
+    inProgress: getInProgress(state),
+    isLogin: getIsLogin(state),
   }
 }
 export default compose(

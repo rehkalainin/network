@@ -3,29 +3,11 @@ import style from './Users.module.css'
 import userPhoto from '../../assets/photos/userPhoto.png'
 import { NavLink } from 'react-router-dom'
 
-const Users = (props) => {
-  let pages = []
-  let pagesSize = Math.ceil(props.totalCount / props.usersPerPage)
-  for (let i = 1; i <= pagesSize; i++) {
-    pages.push(i)
-  }
+const Users = ({ users, inProgress, unfollowUser, followUser }) => {
   return (
     <div>
-      <div className={style.pagination}>
-        {pages.map((pageNumber) => (
-          <span
-            key={pageNumber}
-            className={props.currentPage === pageNumber && style.pagination_selectedPage}
-            onClick={() => {
-              props.onChangePage(pageNumber)
-            }}
-          >
-            {pageNumber}
-          </span>
-        ))}
-      </div>
       <div className={style.users}>
-        {props.users.map((user) => (
+        {users.map((user) => (
           <div className={style.users_user}>
             <div className={style.users_user_view}>
               <NavLink to={'/profile/' + user.id}>
@@ -38,9 +20,9 @@ const Users = (props) => {
                 {user.followed ? (
                   <button
                     className={style.button_unFollow}
-                    disabled={props.inProgress.some((id) => id === user.id)}
+                    disabled={inProgress.some((id) => id === user.id)}
                     onClick={() => {
-                      props.unfollowUser(user.id)
+                      unfollowUser(user.id)
                     }}
                   >
                     unfollow
@@ -48,9 +30,9 @@ const Users = (props) => {
                 ) : (
                   <button
                     className={style.button_follow}
-                    disabled={props.inProgress.some((id) => id === user.id)}
+                    disabled={inProgress.some((id) => id === user.id)}
                     onClick={async () => {
-                      props.followUser(user.id)
+                      followUser(user.id)
                     }}
                   >
                     follow

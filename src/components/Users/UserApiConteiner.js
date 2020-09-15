@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Users from './Users'
 import Preloader from 'components/Common/Preloader/Preloader'
+import Paginator from '../Common/paginator/Paginator'
 
 class UserApiConteiner extends React.Component {
   static propTypes = {
@@ -38,12 +39,15 @@ class UserApiConteiner extends React.Component {
     return (
       <div>
         {this.props.isLoading ? <Preloader /> : null}
-        <Users
-          users={this.props.users}
+        <Paginator
           totalCount={this.props.totalCount}
-          usersPerPage={this.props.usersPerPage}
+          itemsPerPage={this.props.usersPerPage}
+          butchSize={20}
           currentPage={this.props.currentPage}
           onChangePage={this.onChangePage.bind(this)}
+        />
+        <Users
+          users={this.props.users}
           follow={this.props.follow}
           unFollow={this.props.unFollow}
           inProgress={this.props.inProgress}
