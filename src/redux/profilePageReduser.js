@@ -38,13 +38,13 @@ export const setProfileStatus = (status) => {
   return { type: SET_PROFILE_STATUS, status }
 }
 
-export const getProfile = (userId) => {
+export const loadProfile = (userId) => {
   return async (dispatch) => {
     const res = await profileApi.getProfile(userId)
     dispatch(setProfile(res))
   }
 }
-export const getStatus = (userId) => {
+export const loadStatus = (userId) => {
   return async (dispatch) => {
     const res = await profileApi.getProfileStatus(userId)
     dispatch(setProfileStatus(res))

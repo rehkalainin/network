@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateStatus } from '../../../../redux/profilePageReduser'
 
 const ProfileStatus = (props) => {
   const [editMode, setEditMode] = useState(false)
   const [status, setStatus] = useState(props.status)
+  const dispatch = useDispatch()
 
   const activateStatus = () => {
     setEditMode(true)
   }
   const deactivateStatus = () => {
     setEditMode(false)
-    props.updateStatus(status)
+    dispatch(updateStatus(status))
   }
   const changeStatus = (e) => {
     setStatus(e.currentTarget.value)
