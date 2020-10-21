@@ -1,5 +1,3 @@
-import { profileApi } from '../api/ProfileAPI'
-
 const ADD_POST = 'ADD-POST'
 const SET_PROFILE = 'SET-PROFILE'
 const SET_PROFILE_STATUS = 'SET-PROFILE-STATUS'
@@ -36,25 +34,6 @@ export const setProfile = (profile) => {
 }
 export const setProfileStatus = (status) => {
   return { type: SET_PROFILE_STATUS, status }
-}
-
-export const loadProfile = (userId) => {
-  return async (dispatch) => {
-    const res = await profileApi.getProfile(userId)
-    dispatch(setProfile(res))
-  }
-}
-export const loadStatus = (userId) => {
-  return async (dispatch) => {
-    const res = await profileApi.getProfileStatus(userId)
-    dispatch(setProfileStatus(res))
-  }
-}
-export const updateStatus = (status) => {
-  return async (dispatch) => {
-    const res = await profileApi.updateProfileStatus(status)
-    if (res.data.resultCode === 0) dispatch(setProfileStatus(status))
-  }
 }
 
 export default profilePageReduser

@@ -2,18 +2,24 @@ import React from 'react'
 import style from './Dialogs.module.css'
 import Dialog from './Dialog/Dialog'
 import Message from './Message/Message'
-import Redirect from 'react-router-dom/es/Redirect'
+
 import { AddMessageFormRedux } from './Message/MessageForm'
+import { useDispatch, useSelector } from 'react-redux'
+import { addMessage } from '../../redux/dialogPageReduser'
 
-const Dialogs = (props) => {
-  const dialogsComponents = props.dialogs.map((dialog) => (
-    <Dialog id={dialog.id} name={dialog.name} />
-  ))
+const Dialogs = () => {
+  const dialogs = useSelector((state) => state.dialogPage.dialogs)
+  const messages = useSelector((state) => state.dialogPage.messages)
+  const isLogin = useSelector((state) => state.auth.isLogin)
 
-  const messagesComponents = props.messages.map((message) => <Message text={message.message} />)
+  const dispatch = useDispatch()
+
+  const dialogsComponents = dialogs.map((dialog) => <Dialog id={dialog.id} name={dialog.name} />)
+
+  const messagesComponents = messages.map((message) => <Message text={message.message} />)
 
   const addNewMessage = (values) => {
-    props.addMessage(values.newMessageBody)
+    dispatch(addMessage(values.newMessageBody))
   }
 
   return (

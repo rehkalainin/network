@@ -1,63 +1,49 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
 import Users from './Users'
 import Preloader from 'components/Common/Preloader/Preloader'
 import Paginator from '../Common/paginator/Paginator'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadUsers, loadUsersByPage } from '../../redux/sagas/sagaUserPage'
+import {
+  getAllUsers,
+  getCurrentPage,
+  getInProgress,
+  getIsLoading,
+  getTotalCount,
+  getUsersPerPage,
+} from '../../redux/selectors/usersSelectors'
 
-class UserApiConteiner extends React.Component {
-  static propTypes = {
-    setIsLoading: PropTypes.func.isRequired,
-    setUsers: PropTypes.func,
-    setTotalCount: PropTypes.func,
-    setInProgress: PropTypes.func,
-    currentPage: PropTypes.number,
-    usersPerPage: PropTypes.number,
-    users: PropTypes.arrayOf(PropTypes.object),
-    isLoading: PropTypes.bool,
-    inProgress: PropTypes.arrayOf(PropTypes.number),
-  }
-  static defaultProps = {
-    isLoading: false,
-  }
+const UserApiConteiner = () => {
+  const users = useSelector(getAllUsers)
+  const currentPage = useSelector(getCurrentPage)
+  const usersPerPage = useSelector(getUsersPerPage)
+  const totalCount = useSelector(getTotalCount)
+  const isLoading = useSelector(getIsLoading)
+  const inProgress = useSelector(getInProgress)
 
-  componentDidMount() {
-    const { currentPage, usersPerPage, getUsers } = this.props
-    getUsers(currentPage, usersPerPage)
-  }
+  const dispatch = useDispatch()
 
-  /**
-   * @param pageNumber {number} номер страницы
-   *
-   * @return void
-   * */
-  async onChangePage(pageNumber) {
-    const { usersPerPage, getUsersByPage } = this.props
-    getUsersByPage(pageNumber, usersPerPage)
+  useEffect(() => {
+    dispatch(loadUsers(currentPage, usersPerPage))
+  }, [])
+
+  const onChangePage = (pageNumber) => {
+    dispatch(loadUsersByPage(pageNumber, usersPerPage))
   }
 
-  render() {
-    return (
-      <div>
-        {this.props.isLoading ? <Preloader /> : null}
-        <Paginator
-          totalCount={this.props.totalCount}
-          itemsPerPage={this.props.usersPerPage}
-          butchSize={20}
-          currentPage={this.props.currentPage}
-          onChangePage={this.onChangePage.bind(this)}
-        />
-        <Users
-          users={this.props.users}
-          follow={this.props.follow}
-          unFollow={this.props.unFollow}
-          inProgress={this.props.inProgress}
-          setInProgress={this.props.setInProgress}
-          unfollowUser={this.props.unfollowUser}
-          followUser={this.props.followUser}
-        />
-      </div>
-    )
-  }
+  return (
+    <div>
+      {isLoading ? <Preloader /> : null}
+      <Paginator
+        totalCount={totalCount}
+        itemsPerPage={usersPerPage}
+        butchSize={20}
+        currentPage={currentPage}
+        onChangePage={onChangePage}
+      />
+      <Users users={users} inProgress={inProgress} />
+    </div>
+  )
 }
 
 export default UserApiConteiner

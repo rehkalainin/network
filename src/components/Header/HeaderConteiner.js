@@ -1,23 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from './Header'
-import API from 'api'
-import { connect } from 'react-redux'
-import { authMe, logout, setAuthUserData } from '../../redux/authReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { authMe, logout } from '../../redux/sagas/sagaAuth'
 
-class HeaderConteiner extends React.Component {
-  async componentDidMount() {
-    const { authMe } = this.props
-    authMe()
-  }
+const HeaderContainer = () => {
+  const login = useSelector((state) => state.auth.login)
+  const isLogin = useSelector((state) => state.auth.isLogin)
 
-  render() {
-    return <Header {...this.props} />
+  const dispatch = useDispatch()
+
+  const logOut = () => {
+    dispatch(logout())
   }
+  useEffect(() => {
+    dispatch(authMe())
+  }, [])
+
+  return <Header login={login} isLogin={isLogin} logOut={logOut} authMe={authMe} />
 }
 
-const mapStateToProps = (state) => ({
-  login: state.auth.login,
-  isLogin: state.auth.isLogin,
-})
-
-export default connect(mapStateToProps, { authMe, logout })(HeaderConteiner)
+export default HeaderContainer

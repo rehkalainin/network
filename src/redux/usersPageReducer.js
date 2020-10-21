@@ -82,46 +82,46 @@ export const setInProgress = (isLoading, userId) => {
   return { type: SET_IN_PROGRESS, isLoading, userId }
 }
 
-export const getUsers = (page, count) => {
-  return async (dispatch) => {
-    dispatch(setIsLoading(true))
-    const res = await usersApi.getUsers(page, count)
-    const { items, totalCount } = res
-    dispatch(setIsLoading(false))
-    dispatch(setUsers(items))
-    dispatch(setTotalCount(totalCount))
-  }
-}
-export const getUsersByPage = (pageNumber, count) => {
-  return async (dispatch) => {
-    dispatch(setCurrentPage(pageNumber))
-    dispatch(setIsLoading(true))
-
-    const res = await usersApi.getUsers(pageNumber, count)
-    const { items } = res
-    dispatch(setIsLoading(false))
-    dispatch(setUsers(items))
-  }
-}
-export const unfollowUser = (userId) => {
-  return async (dispatch) => {
-    dispatch(setInProgress(true, userId))
-    const res = await followApi.unFollowUser(userId)
-    if (res.data.resultCode === 0) {
-      dispatch(unFollow(userId))
-    }
-    dispatch(setInProgress(false, userId))
-  }
-}
-export const followUser = (userId) => {
-  return async (dispatch) => {
-    dispatch(setInProgress(true, userId))
-    const res = await followApi.followUser(userId)
-    if (res.data.resultCode === 0) {
-      dispatch(follow(userId))
-    }
-    dispatch(setInProgress(false, userId))
-  }
-}
+// export const getUsers = (page, count) => {
+//   return async (dispatch) => {
+//     dispatch(setIsLoading(true))
+//     const res = await usersApi.getUsers(page, count)
+//     const { items, totalCount } = res
+//     dispatch(setIsLoading(false))
+//     dispatch(setUsers(items))
+//     dispatch(setTotalCount(totalCount))
+//   }
+// }
+// export const getUsersByPage = (pageNumber, count) => {
+//   return async (dispatch) => {
+//     dispatch(setCurrentPage(pageNumber))
+//     dispatch(setIsLoading(true))
+//
+//     const res = await usersApi.getUsers(pageNumber, count)
+//     const { items } = res
+//     dispatch(setIsLoading(false))
+//     dispatch(setUsers(items))
+//   }
+// }
+// export const unfollowUser = (userId) => {
+//   return async (dispatch) => {
+//     dispatch(setInProgress(true, userId))
+//     const res = await followApi.unFollowUser(userId)
+//     if (res.data.resultCode === 0) {
+//       dispatch(unFollow(userId))
+//     }
+//     dispatch(setInProgress(false, userId))
+//   }
+// }
+// export const followUser = (userId) => {
+//   return async (dispatch) => {
+//     dispatch(setInProgress(true, userId))
+//     const res = await followApi.followUser(userId)
+//     if (res.data.resultCode === 0) {
+//       dispatch(follow(userId))
+//     }
+//     dispatch(setInProgress(false, userId))
+//   }
+// }
 
 export default usersPageReducer

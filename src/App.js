@@ -5,11 +5,11 @@ import { Route } from 'react-router-dom'
 import News from './components/News/News'
 import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
-import DialogsConteiner from './components/Dialogs/DialogsConteiner'
 import UsersConteiner from './components/Users'
 import ProfileConteiner from './components/Profile'
 import HeaderConteiner from './components/Header/HeaderConteiner'
 import Login from './components/Login/Login'
+import Dialogs from './components/Dialogs/Dialogs'
 
 const App = () => {
   useEffect(() => {
@@ -22,7 +22,7 @@ const App = () => {
       <div className="app-wrapper-content">
         <Route path="/login" render={() => <Login />} />
         <Route path="/profile/:userId?" render={() => <ProfileConteiner />} />
-        <Route path="/dialogs" render={() => <DialogsConteiner />} />
+        <Route path="/dialogs" render={() => <Dialogs />} />
         <Route path="/users" render={() => <UsersConteiner />} />
         <Route path="/news" component={News} />
         <Route path="/music" component={Music} />

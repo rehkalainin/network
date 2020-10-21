@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { loadProfile, loadStatus } from '../../redux/profilePageReduser'
+
 import Profile from './Profile'
 import withRouter from 'react-router-dom/es/withRouter'
 import userPhoto from 'assets/photos/userPhoto.png'
@@ -8,6 +7,7 @@ import { withLogin } from '../../hoc/withLogin'
 import { compose } from 'redux'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { loadProfile, loadStatus } from '../../redux/sagas/sagaProfilePage'
 
 const ProfileContainer = () => {
   const { userId } = useParams() // для вытаскивания параметров из урла

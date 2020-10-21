@@ -2,8 +2,12 @@ import React from 'react'
 import style from './Users.module.css'
 import userPhoto from '../../assets/photos/userPhoto.png'
 import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { followUser, unFollowUser } from '../../redux/sagas/sagaUserPage'
 
-const Users = ({ users, inProgress, unfollowUser, followUser }) => {
+const Users = ({ users, inProgress }) => {
+  const dispatch = useDispatch()
+
   return (
     <div>
       <div className={style.users}>
@@ -22,7 +26,7 @@ const Users = ({ users, inProgress, unfollowUser, followUser }) => {
                     className={style.button_unFollow}
                     disabled={inProgress.some((id) => id === user.id)}
                     onClick={() => {
-                      unfollowUser(user.id)
+                      dispatch(unFollowUser(user.id))
                     }}
                   >
                     unfollow
@@ -31,8 +35,8 @@ const Users = ({ users, inProgress, unfollowUser, followUser }) => {
                   <button
                     className={style.button_follow}
                     disabled={inProgress.some((id) => id === user.id)}
-                    onClick={async () => {
-                      followUser(user.id)
+                    onClick={() => {
+                      dispatch(followUser(user.id))
                     }}
                   >
                     follow

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateStatus } from '../../../../redux/profilePageReduser'
+import { updateStatus } from '../../../../redux/sagas/sagaProfilePage'
 
 const ProfileStatus = (props) => {
   const [editMode, setEditMode] = useState(false)
