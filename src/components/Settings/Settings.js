@@ -27,6 +27,16 @@ console.log('feature/3 test4');
 
 console.log('feature/2 test1');
 
+console.log('feature/5 test1');
+console.log('feature/5 test2');
+console.log('feature/5 test3');
+console.log('feature/5 test4');
+console.log('feature/5 test5');
+console.log('feature/5 test6');
+
+
+
+
 // --------------------------------------------------------------
 // [1 , 3, "5", ['2x', 3, ['x2']]]; // 14
 const arr1 = [1, 3, "5", ['2x', 3, ['x2']]];
