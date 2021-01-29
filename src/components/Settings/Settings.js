@@ -15,6 +15,8 @@ const sortOdd = (arr) => {
 }
 console.log(sortOdd(array))
 console.log('Hello');
+console.log('Test');
+
 
 
 // --------------------------------------------------------------
