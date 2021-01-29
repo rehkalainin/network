@@ -13,6 +13,7 @@ const LoginForm = (props) => {
             name={'email'}
             component={Input}
             validate={[required, maxLenght30]}
+            data-cy={'loginForm'}
           />
         </div>
         <div>
@@ -22,15 +23,16 @@ const LoginForm = (props) => {
             type={'password'}
             component={Input}
             validate={[required]}
+            data-cy={'passwordForm'}
           />
         </div>
         <div>
           <Field type={'checkbox'} name={'rememberMe'} component={Input} />
           remember me
         </div>
-        {props.error && <div>{props.error}</div>}
+        {props.error && <div data-cy={'error'}>{props.error}</div>}
         <div>
-          <button>Login</button>
+          <button>Submit</button>
         </div>
       </form>
     </div>
